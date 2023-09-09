@@ -6,6 +6,12 @@ var HIDDEN_DETAIL_CLASS = 'hidden-detail';
 var TINY_EFFECT_CLASS = 'is-tiny';
 var ESC_KEY = 27;
 
+const thumbnails = document.querySelectorAll('.thumbnail-item');
+const detailImage = document.querySelector('.detail-image');
+const detailTitle = document.querySelector('.detail-image-title');
+const prevButton = document.getElementById('prevButton');
+const nextButton = document.getElementById('nextButton');
+let currentThumbnailIndex = 0;
 
 function setDetails(imageUrl, titleText) {
   'use strict';
@@ -79,5 +85,34 @@ function initializeEvents() {
   thumbnails.forEach(addThumbClickHandler);
   addKeyPressHandler();
 }
+
+function showImage(index) {
+  const thumbnail = thumbnails[index];
+  const image = thumbnail.querySelector('.thumbnail-image');
+  const title = thumbnail.querySelector('.thumbnail-title');
+
+  detailImage.src = image.getAttribute('data-image-url');
+  detailTitle.textContent = title.textContent;
+  currentThumbnailIndex = index;
+
+  // Enable/disable previous and next buttons
+  prevButton.disabled = currentThumbnailIndex === 0;
+  nextButton.disabled = currentThumbnailIndex === thumbnails.length - 1;
+}
+
+function showPreviousImage() {
+  if (currentThumbnailIndex > 0) {
+    showImage(currentThumbnailIndex - 1);
+  }
+}
+
+function showNextImage() {
+  if (currentThumbnailIndex < thumbnails.length - 1) {
+    showImage(currentThumbnailIndex + 1);
+  }
+}
+
+// Initialize with the first image
+showImage(currentThumbnailIndex);
 
 initializeEvents();

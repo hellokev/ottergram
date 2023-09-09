@@ -162,3 +162,28 @@ a {
         margin-top: 20px;
     }
 }
+
+/* CSS */
+
+.prev-button,
+.next-button {
+  background-color: rgba(96, 125, 139, 0.7);
+  color: rgb(202, 238, 255);
+  border: none;
+  padding: 10px 20px;
+  margin: 10px;
+  cursor: pointer;
+  font-size: 16px;
+  outline: none;
+}
+
+.prev-button:disabled,
+.next-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.prev-button:hover,
+.next-button:hover {
+  background-color: rgb(96, 125, 139);
+}
